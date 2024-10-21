@@ -86,15 +86,15 @@ export const App = () => {
                                 <p className="joke-list-item-text">
                                     {joke.text}
                                 </p>
-                                <div>
+                                <div className="joke-list-action-toggle">
                                     <button
-                                        className="joke-list-action-toggle"
+                                        
                                         onClick={() => {
                                             toggleJokeStatus(joke)
                                             storeAllJokesInState()
                                         }}
                                     >
-                                        Tell
+                                        <i class="fa-solid fa-arrow-right"></i>
                                     </button>
                                 </div>
                             </li>
@@ -112,15 +112,15 @@ export const App = () => {
                                 <p className="joke-list-item-text">
                                     {joke.text}
                                 </p>
-                                <div>
+                                <div className="joke-list-action-toggle">
                                     <button
-                                        className="joke-list-action-toggle"
+                                       
                                         onClick={() => {
                                             toggleJokeStatus(joke)
                                             storeAllJokesInState()
                                         }}
                                     >
-                                        Untell
+                                        <i class="fa-solid fa-arrow-left"></i>
                                     </button>
                                 </div>
                             </li>
