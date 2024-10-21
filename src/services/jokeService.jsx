@@ -16,7 +16,7 @@ export const getAllJokes = () => {
 }
 
 export const tellOrUntellJoke = (editedJoke) => {
-    fetch("http://localhost:8088/jokes", {
+    fetch(`http://localhost:8088/jokes/${editedJoke.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

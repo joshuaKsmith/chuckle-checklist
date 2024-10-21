@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAllJokes, postNewJoke } from "./services/jokeService"
+import { getAllJokes, postNewJoke, tellOrUntellJoke } from "./services/jokeService"
 import stevePic from "./assets/steve.png"
 
 export const App = () => {
@@ -27,8 +27,17 @@ export const App = () => {
     const storeAllJokesInState = () => {
         getAllJokes().then(jokesArray => {
             setAllJokes(jokesArray)
-            console.log("jokes stored in state")
+            console.log("jokes refreshed")
         })
+    }
+
+    const toggleJokeStatus = (jokeToEdit) => {
+        const editedJoke = {
+            "id": jokeToEdit.id,
+            "text": jokeToEdit.text,
+            "told": !jokeToEdit.told
+        }
+        tellOrUntellJoke(editedJoke)
     }
 
     return (
@@ -77,6 +86,17 @@ export const App = () => {
                                 <p className="joke-list-item-text">
                                     {joke.text}
                                 </p>
+                                <div>
+                                    <button
+                                        className="joke-list-action-toggle"
+                                        onClick={() => {
+                                            toggleJokeStatus(joke)
+                                            storeAllJokesInState()
+                                        }}
+                                    >
+                                        Tell
+                                    </button>
+                                </div>
                             </li>
                         )
                     })}
@@ -92,6 +112,17 @@ export const App = () => {
                                 <p className="joke-list-item-text">
                                     {joke.text}
                                 </p>
+                                <div>
+                                    <button
+                                        className="joke-list-action-toggle"
+                                        onClick={() => {
+                                            toggleJokeStatus(joke)
+                                            storeAllJokesInState()
+                                        }}
+                                    >
+                                        Untell
+                                    </button>
+                                </div>
                             </li>
                         )
                     })}
