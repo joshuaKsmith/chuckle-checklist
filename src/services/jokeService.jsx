@@ -24,3 +24,12 @@ export const tellOrUntellJoke = (editedJoke) => {
         body: JSON.stringify(editedJoke)
     })
 }
+
+export const deleteJoke = (jokeID) => {
+    fetch(`http://localhost:8088/jokes/${jokeID}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json" 
+        }
+    })
+}

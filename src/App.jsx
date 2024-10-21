@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAllJokes, postNewJoke, tellOrUntellJoke } from "./services/jokeService"
+import { deleteJoke, getAllJokes, postNewJoke, tellOrUntellJoke } from "./services/jokeService"
 import stevePic from "./assets/steve.png"
 
 export const App = () => {
@@ -77,6 +77,7 @@ export const App = () => {
             <div className="joke-lists-container">
                 <div className="joke-list-container">
                     <h2>
+                        <i className="fa-solid fa-frown"></i>
                         Untold
                         <span className="untold-count">{untoldJokes.length}</span>
                     </h2>
@@ -86,15 +87,24 @@ export const App = () => {
                                 <p className="joke-list-item-text">
                                     {joke.text}
                                 </p>
+                                <div className="joke-list-action-delete">
+                                    <button
+                                        onClick={() => {
+                                            deleteJoke(joke.id)
+                                            storeAllJokesInState()
+                                        }}
+                                    >
+                                        <i className="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
                                 <div className="joke-list-action-toggle">
                                     <button
-                                        
                                         onClick={() => {
                                             toggleJokeStatus(joke)
                                             storeAllJokesInState()
                                         }}
                                     >
-                                        <i class="fa-solid fa-arrow-right"></i>
+                                        <i className="fa-solid fa-grin"></i>
                                     </button>
                                 </div>
                             </li>
@@ -103,6 +113,7 @@ export const App = () => {
                 </div>
                 <div className="joke-list-container">
                     <h2>
+                        <i className="fa-solid fa-grin"></i>
                         Told
                         <span className="told-count">{toldJokes.length}</span>
                     </h2>
@@ -112,15 +123,24 @@ export const App = () => {
                                 <p className="joke-list-item-text">
                                     {joke.text}
                                 </p>
+                                <div className="joke-list-action-delete">
+                                    <button
+                                        onClick={() => {
+                                            deleteJoke(joke.id)
+                                            storeAllJokesInState()
+                                        }}
+                                    >
+                                        <i className="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
                                 <div className="joke-list-action-toggle">
                                     <button
-                                       
                                         onClick={() => {
                                             toggleJokeStatus(joke)
                                             storeAllJokesInState()
                                         }}
                                     >
-                                        <i class="fa-solid fa-arrow-left"></i>
+                                        <i className="fa-solid fa-frown"></i>
                                     </button>
                                 </div>
                             </li>
