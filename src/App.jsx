@@ -8,14 +8,19 @@ export const App = () => {
     const [untoldJokes, setUntoldJokes] = useState([])
     const [toldJokes, setToldJokes] = useState([])
 
-    useEffect(() => {
+    const storeAllJokesInState = () => {
         getAllJokes().then(jokesArray => {
             setAllJokes(jokesArray)
-            console.log("jokes stored in state")
+            console.log("jokes refreshed")
         })
+    }
+
+    useEffect(() => {
+        storeAllJokesInState()
     }, [])
 
     useEffect(() => {
+        console.log(allJokes)
         setUntoldJokes(allJokes.filter(
             (joke) => !joke.told
         ))
@@ -24,20 +29,16 @@ export const App = () => {
         ))
     }, [allJokes])
 
-    const storeAllJokesInState = () => {
-        getAllJokes().then(jokesArray => {
-            setAllJokes(jokesArray)
-            console.log("jokes refreshed")
-        })
-    }
-
     const toggleJokeStatus = (jokeToEdit) => {
         const editedJoke = {
             "id": jokeToEdit.id,
             "text": jokeToEdit.text,
             "told": !jokeToEdit.told
         }
-        tellOrUntellJoke(editedJoke)
+        tellOrUntellJoke(editedJoke).then(() => {
+            storeAllJokesInState()
+        })
+
     }
 
     return (
@@ -101,7 +102,6 @@ export const App = () => {
                                     <button
                                         onClick={() => {
                                             toggleJokeStatus(joke)
-                                            storeAllJokesInState()
                                         }}
                                     >
                                         <i className="fa-solid fa-grin"></i>
